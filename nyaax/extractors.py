@@ -2,7 +2,7 @@ import logging
 from datetime import datetime
 from typing import Callable, List
 from bs4 import BeautifulSoup, FeatureNotFound
-from nyaax.containers import Torrent, User, View, Comment
+from nyaax.objs import Torrent, User, View, Comment
 from nyaax.errors import NoResultsFound, UnexpectedError
 from nyaax.magnets import magnet_builder
 from nyaax.utils import to_bytes

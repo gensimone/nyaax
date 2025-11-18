@@ -1,4 +1,4 @@
-from nyaax.containers import Torrent
+from nyaax.objs import Torrent
 
 
 def print_torrent(torrent: Torrent) -> None:

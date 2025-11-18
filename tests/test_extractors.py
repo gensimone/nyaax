@@ -3,7 +3,7 @@ import os
 import _types
 from typing import Callable, Union, List
 import nyaax.extractors
-from nyaax.containers import Torrent, Comment, View
+from nyaax.objs import Torrent, Comment, View
 
 _SAVE_RESPONSES = True
 if _SAVE_RESPONSES:

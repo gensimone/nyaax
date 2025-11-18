@@ -1,4 +1,4 @@
-from .containers import (
+from .objs import (
     Torrent,
     Comment,
     View,
@@ -28,7 +28,7 @@ from .magnets import magnet_builder
 
 
 __all__ = [
-    # Containers
+    # Objects
     'Torrent',
     'Comment',
     'Comment',
