@@ -1,6 +1,6 @@
 from typing import List
 from datetime import datetime
-from nyaax.containers import Torrent, User, Comment, View
+from nyaax.objs import Torrent, User, Comment, View
 
 
 def check_torrent_fields(torrent: Torrent) -> None:
