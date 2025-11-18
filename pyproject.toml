@@ -1,30 +1,13 @@
-[tool.poetry]
-name = 'nyaax'
-version = '0.1.0'
-description = 'Nyaa API written in Python'
-authors = ['Simone Gentili <gensimone.git@gmail.com>']
-license = 'MIT'
-readme = 'README'
-homepage = 'https://pypi.org/project/nyaax/'
-repository = 'https://github.com/gensimone/nyaax'
-keywords = [
-  'nyaa',
-  'nyaa-api',
-  'nyaa-rss',
-  'nyaasi',
-  'nyaa-si',
-  'sukebei',
-  'sukebei-api',
-  'sukebei-rss',
-  'nyaa.land',
-  'nyaa-land',
-  'nyaa.land-api',
-  'nyaa-land-api',
-  'torrent',
-  'torrent download',
-  'torrent-api',
-  'python-api'
+[project]
+name = "nyaax"
+version = "0.1.0"
+description = "Nyaa API written in Python"
+authors = [
+  {name = "Simone Gentili", email = "gensimone.git@gmail.com"}
 ]
+license = "MIT"
+license-files = [ "LICENSE" ]
+readme = "README"
 
 [tool.poetry.dependencies]
 python='^3.8'
@@ -37,5 +20,5 @@ html5lib = '^1.1'
 lxml = '^5.2.2'
 
 [build-system]
-requires = ['poetry-core>=1.0.0']
-build-backend = 'poetry.core.masonry.api'
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
