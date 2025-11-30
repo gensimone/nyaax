@@ -1,6 +1,5 @@
 from datetime import datetime
 from dataclasses import dataclass
-from typing import Optional
 
 
 @dataclass(unsafe_hash=True)
@@ -22,10 +21,10 @@ class Torrent:
     code: int
     magnet_link: str
     comments: int = 0
-    torrent_type: Optional[str] = None
-    information: Optional[str] = None
-    info_hash: Optional[str] = None
-    submitter: Optional[User] = None
+    torrent_type: str | None = None
+    information: str | None = None
+    info_hash: str | None = None
+    submitter: User | None = None
 
 
 @dataclass(unsafe_hash=True)
@@ -33,7 +32,7 @@ class Comment:
     user: User
     date: str
     text: str
-    avatar: Optional[str]
+    avatar: str | None
 
 
 @dataclass(unsafe_hash=True)
