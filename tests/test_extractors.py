@@ -1,6 +1,6 @@
 import requests
 import os
-import _types
+from tests import _types
 from typing import Callable
 import nyaax.extractors
 from nyaax.objs import Torrent, Comment, View
