@@ -1,4 +1,3 @@
-from typing import List
 from datetime import datetime
 from nyaax.objs import Torrent, User, Comment, View
 
@@ -39,7 +38,7 @@ def check_torrent_fields(torrent: Torrent) -> None:
         check_user_fields(torrent.submitter)
 
 
-def check_torrents_fields(torrents: List[Torrent]) -> None:
+def check_torrents_fields(torrents: list[Torrent]) -> None:
     for torrent in torrents:
         check_torrent_fields(torrent)
 
@@ -57,7 +56,7 @@ def check_comment_fields(comment: Comment) -> None:
     check_user_fields(comment.user)
 
 
-def check_comments_fields(comments: List[Comment]) -> None:
+def check_comments_fields(comments: list[Comment]) -> None:
     for comment in comments:
         check_comment_fields(comment)
 
