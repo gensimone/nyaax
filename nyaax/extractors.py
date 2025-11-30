@@ -1,6 +1,6 @@
 import logging
 from datetime import datetime
-from typing import Callable, List
+from typing import Callable
 from bs4 import BeautifulSoup, FeatureNotFound
 from nyaax.objs import Torrent, User, View, Comment
 from nyaax.errors import NoResultsFound, UnexpectedError
@@ -38,12 +38,12 @@ def _log_unexpected_errors(func: Callable) -> Callable:
 
 
 @_log_unexpected_errors
-def get_multiple_torrents(content: str, parser: str) -> List[Torrent]:
+def get_multiple_torrents(content: str, parser: str) -> list[Torrent]:
     soup = BeautifulSoup(content, parser)
     tbody_entries = soup.find('tbody')
     if not tbody_entries:
         raise NoResultsFound
-    torrents: List[Torrent] = []
+    torrents: list[Torrent] = []
     for entry in tbody_entries.find_all('tr'):  # type: ignore
 
         cols = entry.find_all('td')
@@ -95,9 +95,9 @@ def get_multiple_torrents(content: str, parser: str) -> List[Torrent]:
 
 
 @_log_unexpected_errors
-def get_multiple_torrents_rss(content: str, parser: str) -> List[Torrent]:
+def get_multiple_torrents_rss(content: str, parser: str) -> list[Torrent]:
     soup = BeautifulSoup(content, parser)
-    torrents: List[Torrent] = []
+    torrents: list[Torrent] = []
     items = soup.find_all('item')
     if not items:
         raise NoResultsFound
@@ -167,14 +167,14 @@ def _get_description(soup: BeautifulSoup) -> str:
 
 
 @_log_unexpected_errors
-def get_comments(content: str, parser: str) -> List[Comment]:
+def get_comments(content: str, parser: str) -> list[Comment]:
     return _get_comments(BeautifulSoup(content, parser))
 
 
-def _get_comments(soup: BeautifulSoup) -> List[Comment]:
+def _get_comments(soup: BeautifulSoup) -> list[Comment]:
     comments_data = soup.find('div', {'id': 'comments'})
     comment_class = {'class': 'panel panel-default comment-panel'}
-    comments: List[Comment] = []
+    comments: list[Comment] = []
     for comment_data in comments_data.find_all('div', comment_class):  # type: ignore
         try:
             user = User(
