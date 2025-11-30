@@ -26,7 +26,7 @@ def _get_response_content(url: str) -> str | bytes:
         filename = f'{url[8:].replace('/', '_')}.html'
         filepath = os.path.join(_SAVE_DIR, filename)
         with open(filepath, 'wb') as f:
-            f.write(response.content)
+            _ = f.write(response.content)
     return response.content
 
 
