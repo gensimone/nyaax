@@ -1,7 +1,7 @@
 import requests
 import os
 import _types
-from typing import Callable, Union
+from typing import Callable
 import nyaax.extractors
 from nyaax.objs import Torrent, Comment, View
 
@@ -19,7 +19,7 @@ _PARSERS = [
 ]
 
 
-def _get_response_content(url: str) -> Union[str, bytes]:
+def _get_response_content(url: str) -> str | bytes:
     response = _SESSION.get(url)
     response.raise_for_status()
     if _SAVE_RESPONSES:
@@ -55,7 +55,7 @@ _SINGLE_TORRENT = [
 ]
 
 
-def _inputs(contents: list[Union[str, bytes]]) -> Callable:
+def _inputs(contents: list[str | bytes]) -> Callable:
     def _decorator(func: Callable) -> Callable:
         def _inner() -> None:
             for content in contents:
@@ -66,7 +66,7 @@ def _inputs(contents: list[Union[str, bytes]]) -> Callable:
 
 def _extractor(extractor_func_name: str) -> Callable:
     def _decorator(func: Callable) -> Callable:
-        def _inner(content: Union[str, bytes]) -> None:
+        def _inner(content: list[str | bytes]) -> None:
             for parser in _PARSERS:
                 data = getattr(nyaax.extractors, extractor_func_name)(content, parser)
                 func(data)
