@@ -1,6 +1,6 @@
 from datetime import datetime
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import Optional
 
 
 @dataclass(unsafe_hash=True)
@@ -40,4 +40,4 @@ class Comment:
 class View:
     torrent: Torrent
     description: str
-    comments: List[Comment]
+    comments: list[Comment]
