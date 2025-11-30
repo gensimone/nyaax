@@ -1,7 +1,7 @@
 import requests
 import os
 import _types
-from typing import Callable, Union, List
+from typing import Callable, Union
 import nyaax.extractors
 from nyaax.objs import Torrent, Comment, View
 
@@ -55,7 +55,7 @@ _SINGLE_TORRENT = [
 ]
 
 
-def _inputs(contents: List[Union[str, bytes]]) -> Callable:
+def _inputs(contents: list[Union[str, bytes]]) -> Callable:
     def _decorator(func: Callable) -> Callable:
         def _inner() -> None:
             for content in contents:
@@ -82,19 +82,19 @@ def test_single_torrent(data: Torrent) -> None:
 
 @_inputs(_MULTIPLE_TORRENT)
 @_extractor('get_multiple_torrents')
-def test_multiple_torrent(data: List[Torrent]) -> None:
+def test_multiple_torrent(data: list[Torrent]) -> None:
     _types.check_torrents_fields(data)
 
 
 @_inputs(_MULTIPLE_TORRENT_RSS)
 @_extractor('get_multiple_torrents_rss')
-def test_multiple_torrent_rss(data: List[Torrent]) -> None:
+def test_multiple_torrent_rss(data: list[Torrent]) -> None:
     _types.check_torrents_fields(data)
 
 
 @_inputs(_SINGLE_TORRENT)
 @_extractor('get_comments')
-def test_comments(data: List[Comment]) -> None:
+def test_comments(data: list[Comment]) -> None:
     _types.check_comments_fields(data)
 
 
