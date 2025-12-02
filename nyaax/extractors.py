@@ -17,6 +17,7 @@ https://nyaa.si/view/
     get_view
     get_description
     get_single_torrent
+    get_comments
 """
 
 
