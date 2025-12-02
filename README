@@ -1,1 +1,81 @@
 Nyaa API written in Python
+
+> HOW TO INSTALL:
+The code is hosted on Pypi, so you can install it using pip(x):
+$ pip install nyaax
+
+> API:
+Six methods are available to use:
+- get_view
+- get_description
+- get_single_torrent
+- get_comments
+- get_multiple_torrents
+- get_multiple_torrents_rss
+
+(Working on get_file_tree)
+
+To use them, import the module 'extractors':
+
+--- Python
+
+import requests
+from nyaax import extractors as ex
+
+rs = requests.get("https://nyaa.si/?f=0&c=0_0&q=Initial+D")
+torrents = ex.get_multiple_torrents(rs)
+
+# torrents -> [Torrent(seeders=10, code=2, ...), Torrent(info_hash=..., ...), ...]
+
+---
+
+Each method is responsible for extracting data from a particular page or a portion of it.
+Below is a brief description of the methods currently available and from which URLs they
+extract the data.
+
+[https://nyaa.si/view/...]
+- get_view -> View
+- get_description -> str
+- get_single_torrent -> Torrent
+- get_comments -> list[Comment]
+
+[https://nyaa.si/?q=...]
+- get_multiple_torrents -> list[Torrent]
+
+[https://nyaa.si/?page=rss&q=...]
+- get_multiple_torrents_rss -> list[Torrent]
+
+
+Below is a description of the objects returned by the 'extractors' module functions:
+
+Torrent:
+- size: int
+- date: datetime
+- seeders: int
+- leechers: int
+- completed_downloads: int
+- category: str
+- subcategory: str
+- title: str
+- code: int
+- magnet_link: str
+- comments: int
+- torrent_type: str | None
+- information: str | None
+- info_hash: str | None
+- submitter: User | None
+
+User:
+- name: str
+- trusted: bool
+
+View:
+- torrent: Torrent
+- description: str
+- comments: list[Comment]
+
+Comment:
+- user: User
+- date: str
+- text: str
+- avatar: str | None
