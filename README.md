@@ -1,10 +1,12 @@
-Nyaa API written in Python
+# Nyaax - Nyaa API written in Python
 
-> HOW TO INSTALL:
-The code is hosted on Pypi, so you can install it using pip(x):
-$ pip install nyaax
+## Installation
+Nyaax is available on Pypi so you can install it using pip
+```sh
+pip install nyaax
+```
 
-> API:
+## API
 Six methods are available to use:
 - get_view
 - get_description
@@ -17,8 +19,7 @@ Six methods are available to use:
 
 To use them, import the module 'extractors':
 
---- Python
-
+```python
 import requests
 from nyaax import extractors as ex
 
@@ -26,6 +27,7 @@ rs = requests.get("https://nyaa.si/?f=0&c=0_0&q=Initial+D")
 torrents = ex.get_multiple_torrents(rs)
 
 # torrents -> [Torrent(seeders=10, code=2, ...), Torrent(info_hash=..., ...), ...]
+```
 
 ---
 
@@ -44,7 +46,6 @@ extract the data.
 
 [https://nyaa.si/?page=rss&q=...]
 - get_multiple_torrents_rss -> list[Torrent]
-
 
 Below is a description of the objects returned by the 'extractors' module functions:
 
