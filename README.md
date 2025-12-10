@@ -1,7 +1,7 @@
 # Nyaax - Nyaa API written in Python
 
 ## Installation
-Nyaax is available on Pypi so you can install it using pip
+Nyaax is available on PyPI so you can install it using pip
 ```sh
 pip install nyaax
 ```
