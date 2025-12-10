@@ -1,6 +1,6 @@
 [project]
 name = "nyaax"
-version = "0.1.1"
+version = "0.1.2"
 description = "Nyaa API written in Python"
 authors = [
   {name = "Simone Gentili", email = "gensimone.git@gmail.com"}
