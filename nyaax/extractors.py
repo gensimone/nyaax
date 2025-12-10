@@ -28,7 +28,7 @@ def _log_unexpected_errors(func: Callable) -> Callable:
     def _inner(*args, **kwargs):
         try:
             return func(*args, **kwargs)
-        except (NoResultsFound, FeatureNotFound)as e:
+        except (FeatureNotFound, NoResultsFound) as e:
             raise e
         except Exception as e:
             msg = f"Please provide this log error to https://github.com/gensimone/nyaax/issues"
@@ -39,7 +39,7 @@ def _log_unexpected_errors(func: Callable) -> Callable:
 
 
 @_log_unexpected_errors
-def get_multiple_torrents(content: str, parser: str) -> list[Torrent]:
+def get_multiple_torrents(content: str, parser: str = "html.parser") -> list[Torrent]:
     soup = BeautifulSoup(content, parser)
     tbody_entries = soup.find('tbody')
     if not tbody_entries:
@@ -96,7 +96,7 @@ def get_multiple_torrents(content: str, parser: str) -> list[Torrent]:
 
 
 @_log_unexpected_errors
-def get_multiple_torrents_rss(content: str, parser: str) -> list[Torrent]:
+def get_multiple_torrents_rss(content: str, parser: str = "html.parser") -> list[Torrent]:
     soup = BeautifulSoup(content, parser)
     torrents: list[Torrent] = []
     items = soup.find_all('item')
@@ -146,7 +146,7 @@ def get_multiple_torrents_rss(content: str, parser: str) -> list[Torrent]:
 
 
 @_log_unexpected_errors
-def get_view(content: str, parser: str) -> View:
+def get_view(content: str, parser: str = "html.parser") -> View:
     soup = BeautifulSoup(content, parser)
     torrent = _get_single_torrent(soup)
     comments = _get_comments(soup)
@@ -159,7 +159,7 @@ def get_view(content: str, parser: str) -> View:
 
 
 @_log_unexpected_errors
-def get_description(content: str, parser: str) -> str:
+def get_description(content: str, parser: str = "html.parser") -> str:
     return _get_description(BeautifulSoup(content, parser))
 
 
@@ -168,7 +168,7 @@ def _get_description(soup: BeautifulSoup) -> str:
 
 
 @_log_unexpected_errors
-def get_comments(content: str, parser: str) -> list[Comment]:
+def get_comments(content: str, parser: str = "html.parser") -> list[Comment]:
     return _get_comments(BeautifulSoup(content, parser))
 
 
@@ -206,7 +206,7 @@ def _get_comments(soup: BeautifulSoup) -> list[Comment]:
 
 
 @_log_unexpected_errors
-def get_single_torrent(content: str, parser: str) -> Torrent:
+def get_single_torrent(content: str, parser: str = "html.parser") -> Torrent:
     return _get_single_torrent(BeautifulSoup(content, parser))
 
 
