@@ -2,31 +2,11 @@ class NyaaXError(Exception):
     """ Base NyaaX error """
 
 
-class FormatterError(NyaaXError):
-    """ Base Formatter error """
-
-
-class InvalidCategory(FormatterError):
-    """ Invalid category error """
-
-
-class InvalidSubcategory(FormatterError):
-    """ Invalid subcategory error """
-
-
-class InvalidPage(FormatterError):
-    """ Invalid page error """
-
-
-class ExtractionError(NyaaXError):
-    """ Base Extraction error """
-
-
-class NoResultsFound(ExtractionError):
+class NoResultsFound(NyaaXError):
     """ No results found error """
 
 
-class UnexpectedError(ExtractionError):
+class UnexpectedError(NyaaXError):
     """ Unexpected error """
     def __init__(self, exc: BaseException, error_msg: str):
         self.exc = exc

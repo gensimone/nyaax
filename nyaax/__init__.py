@@ -16,12 +16,8 @@ from .extractors import (
 
 from .errors import (
     NyaaXError,
-    FormatterError,
-    InvalidCategory,
-    InvalidPage,
-    InvalidSubcategory,
-    ExtractionError,
     NoResultsFound,
+    UnexpectedError,
 )
 
 from .magnets import magnet_builder
