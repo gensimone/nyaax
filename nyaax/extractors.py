@@ -28,7 +28,8 @@ def _log_unexpected_errors(func: Callable) -> Callable:
     def _inner(*args, **kwargs):
         try:
             return func(*args, **kwargs)
-        except (FeatureNotFound, NoResultsFound) as e:
+        except (FeatureNotFound,  # Invalid parser
+                NoResultsFound) as e:
             raise e
         except Exception as e:
             msg = f"Please provide this log error to https://github.com/gensimone/nyaax/issues"
@@ -45,7 +46,7 @@ def get_multiple_torrents(content: str, parser: str = "html.parser") -> list[Tor
     if not tbody_entries:
         raise NoResultsFound
     torrents: list[Torrent] = []
-    for entry in tbody_entries.find_all('tr'):  # type: ignore
+    for entry in tbody_entries.find_all('tr'):
 
         cols = entry.find_all('td')
         col0 = cols[0].find_all('a')
@@ -164,7 +165,7 @@ def get_description(content: str, parser: str = "html.parser") -> str:
 
 
 def _get_description(soup: BeautifulSoup) -> str:
-    return soup.find('div', {'id': 'torrent-description'}).get_text()  # type: ignore
+    return soup.find('div', {'id': 'torrent-description'}).get_text()
 
 
 @_log_unexpected_errors
@@ -176,7 +177,7 @@ def _get_comments(soup: BeautifulSoup) -> list[Comment]:
     comments_data = soup.find('div', {'id': 'comments'})
     comment_class = {'class': 'panel panel-default comment-panel'}
     comments: list[Comment] = []
-    for comment_data in comments_data.find_all('div', comment_class):  # type: ignore
+    for comment_data in comments_data.find_all('div', comment_class):
         try:
             user = User(
                 name=comment_data.find('a', {'class': 'text-default'}).get_text(),
@@ -211,14 +212,14 @@ def get_single_torrent(content: str, parser: str = "html.parser") -> Torrent:
 
 
 def _get_single_torrent(soup: BeautifulSoup) -> Torrent:
-    title = soup.find('h3', {'class': 'panel-title'}).get_text(strip=True)  # type: ignore
+    title = soup.find('h3', {'class': 'panel-title'}).get_text(strip=True)
     panel_body = soup.find('div', {'class': 'panel-body'})
-    rows = panel_body.find_all('div', {'class': 'row'})  # type: ignore
+    rows = panel_body.find_all('div', {'class': 'row'})
 
     comments_data = soup.find(
         'div', {'id': 'comments'}
-    ).find('h3', {'class': 'panel-title'})  # type: ignore
-    comments = int(comments_data.get_text().split(' - ')[1])  # type: ignore
+    ).find('h3', {'class': 'panel-title'})
+    comments = int(comments_data.get_text().split(' - ')[1])
 
     div_row_0 = rows[0].find_all('div')
     div_row_1 = rows[1].find_all('div')
@@ -245,7 +246,7 @@ def _get_single_torrent(soup: BeautifulSoup) -> Torrent:
     info_hash = div_row_4[1].get_text()
     footer_attrs = soup.find(
         'div', {'class': 'panel-footer clearfix'}
-    ).find_all('a')  # type: ignore
+    ).find_all('a')
     code = int(footer_attrs[0]['href'][10:-8])
     magnet_link = footer_attrs[1]['href']
     information = information if information != 'No information.' else None
